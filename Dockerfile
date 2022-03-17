@@ -1,7 +1,7 @@
-FROM python:3.8.2-alpine
+FROM python:3.8-alpine
 
-WORKDIR ../Lab_1
+WORKDIR ../Labs_isp_Pithon/Lab_1/lab1.py
 
 COPY . .
 
-CMD ["python","Lab1.py"]
+CMD ["python","lab1.py"]
