@@ -20,7 +20,7 @@ class Picker:
         else:
             if not hasattr(obj, '__module__'):
                 return
-            mod = importlib.import_module(obj.__module__)
+            mod = importlib.import_module(obj.__module__)  # __module__ consist name of module than it was declared
             if obj.__class__.__name__ in dict(
                     inspect.getmembers(mod, inspect.isclass)
             ):
