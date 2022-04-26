@@ -2,7 +2,7 @@ import types
 import importlib
 
 
-class Unpacker:
+class Unpicker:
     def unpack_class(self, obj_dict):
         obj = type(obj_dict["__name__"], obj_dict["__bases__"], obj_dict["__dict__"])
         return obj
@@ -52,11 +52,7 @@ class Unpacker:
         return obj
 
     def unpack(self, obj_dict):
-        try:
-            t = obj_dict["type"]
-        except:
-            KeyError
-            return
+        t = obj_dict["type"]
 
         if t in ("int", "float", "bool", "str"):
             if t == "int":
@@ -66,7 +62,7 @@ class Unpacker:
             if t == "bool":
                 return bool(obj_dict["data"])
             if t == "str":
-                return str(obj_dict["data"])  # excess
+                return str(obj_dict["data"])
 
         if t in ("dict", "list", "tuple", "set", "frozenset"):
             if t == "dict":
