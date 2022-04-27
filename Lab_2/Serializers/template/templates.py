@@ -2,11 +2,12 @@ from collections import namedtuple
 
 # all primitives
 num_temp = 7
-flot_temp = 6.23
+float_temp = 6.23
 str_temp = "microwave"
 bool_temp = True
 bytes_temp = bytes(b'\xd0\x91\xd0\xb0\xd0\xb9\xd1\x82\xd1\x8b')
 bytes_arr_temp = bytearray(bytes_temp)
+buitin_func_temp = dir
 
 
 class TempClass:
@@ -53,10 +54,10 @@ multiple = lambda x, y: x * y
 test_multiple = 10  # x = 2, y = 5
 
 # lists(set, tuple, frozenset)
-lst_temp = ['one', 2, 'three']
-set_temp = set(lst_temp)
-frozenset_temp = frozenset(lst_temp)
-tuple_temp = tuple(lst_temp)
+list_temp = ['one', 2, 'three']
+set_temp = set(list_temp)
+frozenset_temp = frozenset(list_temp)
+tuple_temp = tuple(list_temp)
 
 # dict
 dict_temp = {'first': 1, 'second': 2}

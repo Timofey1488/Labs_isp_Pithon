@@ -14,7 +14,7 @@ class JsonSerializer:
             parser.dump_parser(obj_dict, fp=f)
 
     def dumps(self, obj: object):
-        obj_dict = self.packer.pack(obj)
+        obj_dict = self.picker.pack(obj)
         result_string = parser.dumps_parser(obj_dict)
         return result_string
 

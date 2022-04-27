@@ -11,19 +11,9 @@ class Picker:
     def is_instance(self, obj):
         if not hasattr(obj, "__dict__"):
             return False
-        if inspect.isroutine(obj):  # is obj method or build-in func
-            return False
-        if inspect.isclass(obj):
-            return False
-        if inspect.ismodule(obj):
-            return False
         else:
-            if not hasattr(obj, '__module__'):
-                return
-            mod = importlib.import_module(obj.__module__)  # __module__ consist name of module than it was declared
-            if obj.__class__.__name__ in dict(
-                    inspect.getmembers(mod, inspect.isclass)
-            ):
+            mod = importlib.import_module(obj.__module__)  # return name of the module in which the class is defined
+            if obj.__class__.__name__ in dict(inspect.getmembers(mod, inspect.isclass)):  # return attr of class(mod)
                 return True
             else:
                 return False
