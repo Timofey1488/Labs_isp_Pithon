@@ -11,7 +11,15 @@ class Picker:
     def is_instance(self, obj):
         if not hasattr(obj, "__dict__"):
             return False
+        if inspect.isroutine(obj):  # is obj method or build-in func
+            return False
+        if inspect.isclass(obj):
+            return False
+        if inspect.ismodule(obj):
+            return False
         else:
+            if not hasattr(obj, '__module__'):
+                return
             mod = importlib.import_module(obj.__module__)  # return name of the module in which the class is defined
             if obj.__class__.__name__ in dict(inspect.getmembers(mod, inspect.isclass)):  # return attr of class(mod)
                 return True
@@ -27,9 +35,9 @@ class Picker:
     def get_closure_globs(self, obj, globs):
         if hasattr(obj, '__code__'):
             code_obj = obj.__code__
-            for var in code_obj.co_consts:
+            for var in code_obj.co_consts:  # return const values
                 self.get_closure_globs(var, globs)
-            for name in code_obj.co_names:
+            for name in code_obj.co_names:  # tuple of names of local variables
                 if name in obj.__globals__.keys() and name != obj.__name__:
                     globs[name] = obj.__globals__[name]
                 elif name in dir(builtins):
@@ -95,7 +103,7 @@ class Picker:
                 return obj_dict
 
         if type(obj) in (dict, list, tuple, set, frozenset):
-            if isinstance(obj, dict):
+            if isinstance(obj, dict):  # checking that object is an instanse of this class
                 obj_dict["type"] = "dict"
                 obj_dict["data"] = {key: self.pack(val) for key, val in obj.items()}
                 return obj_dict

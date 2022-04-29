@@ -52,7 +52,11 @@ class Unpicker:
         return obj
 
     def unpack(self, obj_dict):
-        t = obj_dict["type"]
+
+        try:
+            t = obj_dict["type"]
+        except:
+            return
 
         if t in ("int", "float", "bool", "str"):
             if t == "int":
@@ -113,3 +117,4 @@ class Unpicker:
         if t == "instance":
             obj = self.unpack_instance(self.unpack(obj_dict["data"]))
             return obj
+
