@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Cryptomarket{% endblock %}</title>
+    <link href="{% static 'cryptoshop/css/base.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body class="bg-dark text-white">
+    <nav class="navbar navbar-dark bg-primary navbar-expand-md">
+        <header class="container-fluid">
+            <h1 class="navbar-brand">
+                <i class="fas fa-paint-brush"></i> Crypto Shop
+            </h1>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#theMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="theMenu" class="navbar-collapse collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a id="cartLink" class="nav-link" href="#">
+                            <i class="fas fa-shopping-cart"></i> Cart
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                            <a id="logLink" class="nav-link"
+                               href="{#  #}">Sign Out</a>
+                        {% else %}
+                            <a id="logLink" class="nav-link" href="#">Sign In</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </header>
+    </nav>
+
+    <div id="header">
+        <a href="/" class="logo">Cryptomarket</a>
+    </div>
+    <div id="subheader">
+        <div class="cart">
+            Your cart is empty.
+        </div>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+
