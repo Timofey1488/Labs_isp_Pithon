@@ -7,6 +7,8 @@
     <title>{% block title %}Cryptomarket{% endblock %}</title>
     <link href="{% static 'cryptoshop/css/base.css' %}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
 </head>
 <body class="bg-dark text-white">
     <nav class="navbar navbar-dark bg-primary navbar-expand-md">
@@ -41,22 +43,20 @@
                         {% endif %}
                     </li>
                 </ul>
+
             </div>
         </header>
     </nav>
-
-    <div id="header">
-        <a href="/" class="logo">Cryptomarket</a>
-    </div>
-    <div id="subheader">
-        <div class="cart">
-            Your cart is empty.
+     {% if messages %}
+    {% for msg in messages %}
+        <div class="alert alert-{{ msg.tags }}">
+            {{ msg }}
         </div>
-    </div>
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+    {% endfor %}
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+
 </body>
 </html>
 

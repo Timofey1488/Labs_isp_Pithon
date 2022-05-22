@@ -11,3 +11,44 @@ body {
     padding-left: 1%;
     margin-bottom: 0;
 }
+
+li {
+    list-style-type: none; /* Убираем маркеры */
+}
+
+ul {
+    margin-left: 0; /* Отступ слева в браузере IE и Opera */
+    padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+}
+
+a{
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+}
+a:hover {
+    text-decoration: underline;
+}
+.main_content{
+    height: 3000px;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+.item{
+    background-color: #5d8aa8;
+    border-radius: 4px;
+    color: #818182;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+
+.categories_bar{
+    background-color: #5d8aa8;
+    border-radius: 4px;
+    color: #818182;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.categories{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}

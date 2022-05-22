@@ -40,10 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cryptoshop.apps.CryptoshopConfig',
+    'cart.apps.CartConfig',
     'crispy_forms'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+CART_SESSION_ID = "cart"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,16 +1,17 @@
+{% extends "cryptoshop/base.html" %}
 {% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
     <title>{% block title %}My shop{% endblock %}</title>
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
+    <link href="{% static "cryptoshop/css/base.css" %}" rel="stylesheet">
 </head>
 <body>
 <div id="header">
     <a href="/" class="logo">My shop</a>
 </div>
-<div id="subheader">
+<div id="subheader text-white">
     <div class="cart">
         Your cart is empty.
     </div>

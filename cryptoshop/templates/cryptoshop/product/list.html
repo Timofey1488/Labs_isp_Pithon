@@ -1,32 +1,41 @@
 {% extends "cryptoshop/base.html" %}
 {% load static %}
 {% block title %}
-    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+    {% if category %}{{ category.name }}{% else %}Crypto products{% endif %}
 {% endblock %}
 {% block content %}
-    <div id="sidebar">
-        <h3>Categories</h3>
-        <ul>
-            <li {% if not category %}class="selected"{% endif %}>
-                <a href="{% url "cryptoshop:product_list" %}">All</a>
-            </li>
-            {% for c in categories %}
-                <li {% if category.slug == c.slug %}class="selected"{% endif %}>
-                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div id="main" class="product-list">
-        <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
-        {% for product in products %}
-            <div class="item">
-                <a href="{{ product.get_absolute_url }}">
-                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
-                </a>
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
-                ${{ product.price }}
+    <div class="container-fluid text-white">
+        <div class="row">
+            <div class="col-sm-4 ">
+                <section class="categories sticky-top t" >
+                    <h3 class="text-white">Categories</h3>
+                    <ul class="categories_bar">
+                        <li {% if not category %}class="selected"{% endif %}>
+                            <a class="nav-link text-white" href="{% url "cryptoshop:product_list" %}">All</a>
+                        </li>
+                        {% for c in categories %}
+                            <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                                <a class="nav-link text-white" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
             </div>
-        {% endfor %}
+            <div class="col-sm-8">
+                <div class='main_content text-white'>
+                    <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+                    {% for product in products %}
+                        <div class="item">
+                            <a class="text-white" href="{{ product.get_absolute_url }}">
+                                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "cryptoshop/img/no_image.png" %}{% endif %}">
+                            </a>
+                            <a class="text-white" href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                            ${{ product.price }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
     </div>
 {% endblock %}
