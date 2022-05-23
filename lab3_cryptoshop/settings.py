@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cryptoshop.apps.CryptoshopConfig',
     'cart.apps.CartConfig',
-    'crispy_forms'
+    'crispy_forms',
+    'orders.apps.OrdersConfig'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

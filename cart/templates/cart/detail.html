@@ -61,7 +61,7 @@
       </table>
       <p class="text-right">
         <a class="btn btn-primary " href="{% url "cryptoshop:product_list" %}" class="button light">Continue shopping</a>
-        <a class="btn btn-primary " href="#" class="button">Checkout</a>
+        <a class="btn btn-primary " href="{% url "orders:order_create" %}" class="button">Checkout</a>
       </p>
     </div>
 {% endblock %}
