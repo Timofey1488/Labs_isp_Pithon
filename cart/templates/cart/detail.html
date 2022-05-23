@@ -1,0 +1,67 @@
+{% extends "cryptoshop/base.html" %}
+{% load static %}
+
+{% block title %}
+    Shopping cart
+{% endblock %}
+
+{% block content %}
+    <div class=" mt-3">
+        <h1>Shopping cart</h1>
+         <table class="cart">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Update quantity</th>
+                <th>Remove</th>
+                <th>Quantity</th>
+                <th>Price for one</th>
+                <th>Total cost</th>
+              </tr>
+            </thead>
+         <tbody>
+            {% if cart.get_total_price == 0 %}
+                <div>
+                    <p>Сart is empty</p>
+                </div>
+            {% endif %}
+              {% for item in cart %}
+                {% with product=item.product %}
+                  <tr>
+                    <td>
+                      <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'cryptoshop/img/no_image.png' %}{% endif %}">
+                      </a>
+                    </td>
+                    <td class="text-black">{{ product.name }}</td>
+                    <td>
+                      <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                        {{ item.update_quantity_form.quantity }}
+                        {{ item.update_quantity_form.update }}
+                        <input type="submit" value="Update">
+                        {% csrf_token %}
+                      </form>
+                    </td>
+                    <td class="text-black"><a href="{% url 'cart:cart_remove' product.id %}">Remove</a></td>
+                    <td class="text-black">
+                      {{ item.quantity }}
+                    </td>
+                    <td class="text-black">${{ item.price }}</td>
+                    <td class="text-black">${{ item.total_price }}</td>
+                  </tr>
+                {% endwith %}
+              {% endfor %}
+              <tr class="total">
+                <td>Total</td>
+                <td colspan="4"></td>
+                <td class="num">${{ cart.get_total_price }}</td>
+              </tr>
+         </tbody>
+      </table>
+      <p class="text-right">
+        <a class="btn btn-primary " href="{% url "cryptoshop:product_list" %}" class="button light">Continue shopping</a>
+        <a class="btn btn-primary " href="#" class="button">Checkout</a>
+      </p>
+    </div>
+{% endblock %}
