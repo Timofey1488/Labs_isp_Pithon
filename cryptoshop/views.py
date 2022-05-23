@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from cart.forms import CartAddProductForm
 # Create your views here.
 
 from django.shortcuts import render, get_object_or_404
@@ -25,6 +25,7 @@ def product_detail(request, id, slug):
                                 id=id,
                                 slug=slug,
                                 available=True)
+    cart_product_form = CartAddProductForm()
     return render(request,
                   'cryptoshop/product/detail.html',
-                  {'product': product})
+                  {'product': product, 'cart_product_form': cart_product_form})

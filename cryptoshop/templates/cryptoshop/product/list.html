@@ -25,12 +25,20 @@
                 <div class='main_content text-white'>
                     <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
                     {% for product in products %}
-                        <div class="item">
-                            <a class="text-white" href="{{ product.get_absolute_url }}">
-                                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "cryptoshop/img/no_image.png" %}{% endif %}">
-                            </a>
-                            <a class="text-white" href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
-                            ${{ product.price }}
+                        <div class="item px-5">
+                            <div class="row">
+                                <div class="col-sm-4 ">
+                                    <a class="text-white" href="{{ product.get_absolute_url }}">
+                                        <img class="img-thumbnail" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "cryptoshop/img/no_image.png" %}{% endif %}">
+                                    </a>
+                                </div>
+                                <div class="col-sm-8 ">
+                                    <a class="text-white h3" href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                                    <i class="text-white" >Price: ${{  product.price }}</i><br>
+                                    <a class="btn btn-primary mt-5" href="{{ product.get_absolute_url }}">Add in cart</a>
+                                </div>
+                                </div>>
+
                         </div>
                     {% endfor %}
                 </div>
