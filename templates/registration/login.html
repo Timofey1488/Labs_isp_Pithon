@@ -1,0 +1,50 @@
+{% extends "cryptoshop/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+{% block content %}
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please sign in with an account that has access.</p>
+        {% else %}
+            <p id="loginNotification">Please sign in to buy this crypto product.</p>
+        {% endif %}
+    {% endif %}
+
+    <div class="row">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="col-md-4 offset-md-4">
+                <div class="card card-body bg-light text-black ">
+                    <div class=" form-group mr-4">
+                        <label >{{ form.username.label_tag }}</label>
+                        {{ form.username }}
+                    </div>
+                    <div class=" form-group  mt-3 ">
+                        <label>{{ form.password.label_tag }}</label>
+                        {{ form.password }}
+                    </div>
+                    {% if form.errors %}
+                        <p style="text-align: center; color: red">Username and password didn't match.</p>
+                    {% endif %}
+                    <div class="form-group text-center">
+                        <input id="loginButton" type="submit" value="Sign In" class="btn btn-primary mt-3 "/>
+                    </div>
+                    <div id="registerSuggest" class="border-top pt-3">
+                        <small class="text-muted">
+                            Don't have an account? <a href="{% url 'cryptoshop:register' %}">Sign Up</a>
+                        </small>
+                    </div>
+                </div>
+                <input type="hidden" name="next" value="{{ next }}"/>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+</body>
+</html>
