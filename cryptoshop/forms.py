@@ -17,7 +17,7 @@ class UserRegisterForm(UserCreationForm):
 
     def clean_username(self):
         data = self.cleaned_data['username']
-        if not re.match("^[a-z0-9_]{3,30}$", data):
+        if not re.match("^[a-zA-Z0-9]{3,30}$", data):
             raise ValidationError("Username is invalid")
         return data
 
