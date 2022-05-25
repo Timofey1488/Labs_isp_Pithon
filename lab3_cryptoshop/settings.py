@@ -137,3 +137,50 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    'loggers': {  # messages coming here
+        'django': {
+            'handlers': ['console', 'file'],  # ways to handle messages
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+    },
+    'handlers': {  # receives message from loggers
+        'console': {  # record info in console
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'file': {  # record info in file
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': './debug.log',
+            'formatter': 'verbose'
+        },
+    },
+    'filters': {  # setting additional functional
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',  # passes through the messages if DEBUG=True
+        },
+    },
+    'formatters': {  # settings format of output
+        'verbose': {  # expantion for standart output(able to output more than simple)
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+
+}
