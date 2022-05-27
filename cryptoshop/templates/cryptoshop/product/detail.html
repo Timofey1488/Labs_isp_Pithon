@@ -11,26 +11,26 @@
 <div id="header">
     <a href="/" class="logo">Cryptoshop</a>
 </div>
-<div id="subheader text-white">
-    <div class="cart">
-        Your cart is empty.
-    </div>
-</div>
 <div id="content">
     {% block content %}
         <div class="product-detail mx-5 mt-5">
             <img class="" src="{% if product.image %}{{ product.image.url }}{% else %}
             {% static "cryptoshop/img/no_image.png" %}{% endif %}">
             <h1>{{ product.name }}</h1>
-            <h2>
-                <a class="text-white" href="{{ product.category.get_absolute_url }}">{{product.category }}</a>
-            </h2>
+            <h3>
+                <a class="text-white" href="{%url "cryptoshop:product_list"%}">{{product.category }}</a>
+            </h3>
             <p class="price text-white">${{ product.price }}</p>
-            <form action="{% url "cart:cart_add" product.id %}" method="post">
-            {{ cart_product_form }}
-            {% csrf_token %}
-            <input type="submit" value="Add to cart">
+            {% if user.is_authenticated %}
+                <form action="{% url "cart:cart_add" product.id %}" method="post">
+                {{ cart_product_form }}
+                {% csrf_token %}
+                <input type="submit" value="Add to cart">
             </form>
+            {% else%}
+                <p class="text-danger">To buy this product you need authenticated</p>
+            {% endif%}
+
             {{ product.description|linebreaks }}
         </div>
     {% endblock %}

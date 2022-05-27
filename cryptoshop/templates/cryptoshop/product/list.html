@@ -10,12 +10,12 @@
                 <section class="categories sticky-top t" >
                     <h3 class="text-white">Categories</h3>
                     <ul class="categories_bar">
-                        <li {% if not category %}class="selected"{% endif %}>
+                        <li >
                             <a class="nav-link text-white" href="{% url "cryptoshop:product_list" %}">All</a>
                         </li>
                         {% for c in categories %}
-                            <li {% if category.slug == c.slug %}class="selected"{% endif %}>
-                                <a class="nav-link text-white" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                            <li {>
+                                <a class="nav-link text-white" href="{% url 'cryptoshop:concrete_category' c.pk %}">{{ c.name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
