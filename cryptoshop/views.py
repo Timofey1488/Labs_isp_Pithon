@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404
 
 from .forms import UserRegisterForm, ProductNewForm
 from .models import Category, Product, Profile
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 
 logger = logging.getLogger("main_logger")
 logger.setLevel(logging.DEBUG)
@@ -39,7 +39,7 @@ class CategoryDetailView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pk'] = Product.objects.all()
+        context['pk'] = self.kwargs['pk']
 
         return context
 
@@ -92,6 +92,13 @@ class CreateNewProduct(CreateView):
     form_class = ProductNewForm
     template_name = 'cryptoshop/crud/add_new.html'
     success_url = reverse_lazy('cryptoshop:product_list')
+
+
+class DeleteProduct(DeleteView):
+    logger.info("use DeleteOrderView")
+    model = Product
+    template_name = 'cryptoshop/crud/delete.html'
+    success_url = reverse_lazy("cryptoshop:product_list")
 
 
 def product_detail(request, pk):

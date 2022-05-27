@@ -55,3 +55,4 @@ class ProductNewForm(ModelForm):
             'description': forms.TextInput(attrs={"class": "form-control"}),
         }
 
+

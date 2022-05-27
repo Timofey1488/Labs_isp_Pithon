@@ -11,7 +11,7 @@
                     <h3 class="text-white">Categories</h3>
                     <ul class="categories_bar">
                         <li >
-                            <a class="nav-link text-white" href="{% url "cryptoshop:product_list" %}">All</a>
+                            <a class="nav-link text-white" href="{% url "cryptoshop:categories" %}">All</a>
                         </li>
                         {% for c in categories %}
                             <li {>
@@ -56,7 +56,7 @@
                                          </div>
                                      {% endif %}
                                     {% if user.is_staff%}
-                                         <a class="btn btn-danger mt-5" href="{{ product.get_absolute_url }}">Delete</a>
+                                         <a class="btn btn-danger mt-5" href="{%url 'cryptoshop:delete_product' product.pk%}">Delete</a>
                                     {% endif %}
 
                                 </div>

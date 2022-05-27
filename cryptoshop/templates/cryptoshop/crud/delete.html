@@ -1,0 +1,32 @@
+{% extends "cryptoshop/base.html" %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+{% block content %}
+    <div class="container-fluid mt-5 rounded bg-info text-white col-md-6 h-100 justify-content-center align-items-center">
+        <div class="row text-center">
+            <div class="  categories text-center">
+                 <div class="text-white">
+                 <div>
+                     <h4>Are you sure that you want to delete {{ product.name}}?</h4>
+                     <form method="post" action="{% url "cryptoshop:delete_product" product.pk %}">
+                            {% csrf_token %}
+                                <input class="btn btn-danger mx-auto" type="submit" value="Delete"/>
+                                 <a class="btn btn-primary " href="{%url 'cryptoshop:product_list'%}">Cancel</a>
+                        </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+</body>
+</html>
