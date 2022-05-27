@@ -12,6 +12,7 @@ from .forms import CartAddProductForm
 import logging
 
 logger = logging.getLogger("main_logger")
+logger.setLevel(logging.DEBUG)
 
 
 @require_POST

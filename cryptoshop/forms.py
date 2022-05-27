@@ -1,12 +1,11 @@
 import re
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
 from django.forms import ModelForm
-from .models import Profile
+from .models import Profile, Product
 
 
 class UserRegisterForm(UserCreationForm):
@@ -44,3 +43,15 @@ class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         fields = ('profile_pic', "address", "work_place")
+
+
+class ProductNewForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ['category', 'name', 'image', 'description', 'price', 'available', 'stock']
+        widgets = {
+            'category': forms.Select(attrs={"class": "form-control"}),
+            'name': forms.TextInput(attrs={"class": "form-control"}),
+            'description': forms.TextInput(attrs={"class": "form-control"}),
+        }
+

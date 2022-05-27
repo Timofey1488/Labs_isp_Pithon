@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.urls import reverse
 
@@ -35,7 +36,7 @@ class Product(models.Model):
         index_together = (('id', 'slug'),)
 
     def get_absolute_url(self):
-        return reverse('cryptoshop:product_detail', args=[self.id, self.slug])
+        return reverse('cryptoshop:product_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name
