@@ -1,8 +1,17 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
+from django.views.generic import DeleteView
+
 from cryptoshop.models import Product
+from orders.models import Order
 from .cart import Cart
 from .forms import CartAddProductForm
+
+import logging
+
+logger = logging.getLogger("main_logger")
 
 
 @require_POST
@@ -15,6 +24,7 @@ def cart_add(request, product_id):
         cart.add(product=product,
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
+    logger.info("use CardAddView")
     return redirect('cart:cart_detail')
 
 
@@ -23,6 +33,12 @@ def cart_remove(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
     return redirect('cart:cart_detail')
+
+
+class CartRemoveView(LoginRequiredMixin, DeleteView):
+    model = Order
+    success_url = reverse_lazy("cart")
+    logger.info("use DeleteOrderView")
 
 
 def cart_detail(request):

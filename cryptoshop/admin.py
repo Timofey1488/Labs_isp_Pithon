@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, Profile
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -18,5 +18,10 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'address', 'work_place']
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Profile, ProfileAdmin)

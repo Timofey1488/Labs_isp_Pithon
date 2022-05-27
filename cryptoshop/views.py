@@ -1,21 +1,18 @@
 from django.contrib.auth import login
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 from cart.forms import CartAddProductForm
-from django.contrib import messages
 
 import logging
 
 from django.shortcuts import render, get_object_or_404
 
-from orders.forms import OrderCreateForm
-from orders.models import Order
+
 from .forms import UserRegisterForm
-from .models import Category, Product
-from django.views.generic import ListView, DetailView, FormView
+from .models import Category, Product, Profile
+from django.views.generic import ListView, DetailView, FormView, CreateView
 
 logger = logging.getLogger("main_logger")
 
@@ -67,6 +64,7 @@ def product_detail(request, id, slug):
                   {'product': product, 'cart_product_form': cart_product_form})
 
 
+
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
@@ -82,15 +80,28 @@ def product_list(request, category_slug=None):
                    'products': products})
 
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account successfully created for {username}')
-            return redirect('cryptoshop:product_list')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'cryptoshop/register.html', {'form': form})
+class RegisterUserView(SuccessMessageMixin, CreateView):
+    form_class = UserRegisterForm
+    template_name = "cryptoshop/register.html"
+    logger.info("use RegisterUserView")
+    success_message = 'Account successfully created'
+
+    def form_valid(self, form):
+        user = form.save()
+        profile = Profile()
+        profile.user = user
+        user.save()
+        profile.save()
+        #login(self.request.user)
+
+        return HttpResponseRedirect(reverse_lazy('cryptoshop:product_list'))
+
+
+class ShowProfileView(DetailView):
+    model = Profile
+    template_name = "cryptoshop/personal_profile.html"
+    context_object_name = 'profile'
+    logger.info("use ShowProfileView")
+
+    def get_queryset(self):
+        return Profile.objects.filter(user=self.request.user).select_related('user')
