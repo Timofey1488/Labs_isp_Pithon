@@ -1,0 +1,33 @@
+{% extends "cryptoshop/base.html" %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+{% block content %}
+    <div class="container-fluid rounded bg-info text-white col-md-8 h-100 justify-content-center align-items-center">
+        <div class="row ">
+            <div class=" col-md-5 categories ">
+                 <div class="text-white">
+                 <div>
+                    <form action="{% url "cryptoshop:add_product" %}" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div  class="form-group">
+                            <button class="btn btn-primary" type="submit">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+</body>
+</html>
