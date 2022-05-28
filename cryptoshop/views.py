@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404
 
 from .forms import UserRegisterForm, ProductNewForm
 from .models import Category, Product, Profile
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
 logger = logging.getLogger("main_logger")
 logger.setLevel(logging.DEBUG)
@@ -23,11 +23,25 @@ class ProductListView(ListView):
     context_object_name = 'products'
     logger.info("use ProductListView")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
+
+class UpdateProduct(UpdateView):
+    model = Product
+    form_class = ProductNewForm
+    template_name = 'cryptoshop/crud/edit.html'
+    success_url = reverse_lazy('cryptoshop:product_list')
+    logger.info("use UpdateProduct")
+
 
 class CategoryListView(ListView):
     template_name = "cryptoshop/product/list.html"
     model = Category
     context_object_name = 'categories'
+
     logger.info("use CategoryListView")
 
 
@@ -40,11 +54,13 @@ class CategoryDetailView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['pk'] = self.kwargs['pk']
+        context['category'] = Product.objects.get(pk=self.kwargs['pk']).category
+        print(Product.objects.get(pk=self.kwargs['pk']).category)
 
         return context
 
     def get_queryset(self):
-        return print(Product.objects.filter(pk=self.kwargs['pk']).select_related('category'))
+        return Product.objects.filter(category_id=self.kwargs['pk']).select_related('category')
 
 
 class ProductDetailView(DetailView):
