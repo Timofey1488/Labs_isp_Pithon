@@ -6,13 +6,16 @@ from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
 from django.forms import ModelForm
 from .models import Profile, Product
+from django.core.exceptions import ValidationError
 
 
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(required=True, max_length=30, min_length=3,
                                help_text="Latin lowercase letters, underscores and digits only. At least 3 "
                                          "characters.")
+    image = forms.ImageField(required=False)
     email = forms.EmailField(required=True, validators=[EmailValidator(message="Email is invalid")])
+    address = forms.CharField(required=False)
     first_name = forms.CharField(required=False, help_text="First letter should be uppercase. Only latin characters. ")
     last_name = forms.CharField(required=False, help_text="First letter should be uppercase. Only latin characters. ")
 
@@ -54,5 +57,6 @@ class ProductNewForm(ModelForm):
             'name': forms.TextInput(attrs={"class": "form-control"}),
             'description': forms.TextInput(attrs={"class": "form-control"}),
         }
+
 
 

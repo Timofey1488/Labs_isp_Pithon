@@ -14,7 +14,7 @@
                             <a class="nav-link text-white" href="{% url "cryptoshop:categories" %}">All</a>
                         </li>
                         {% for c in categories %}
-                            <li>
+                            <li>`
                                 <a class="nav-link text-white" href="{% url 'cryptoshop:concrete_category' c.pk %}">{{ c.name }}</a>
                             </li>
                         {% endfor %}

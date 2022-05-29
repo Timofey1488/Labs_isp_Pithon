@@ -1,3 +1,6 @@
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -9,7 +12,7 @@ import logging
 from django.shortcuts import render, get_object_or_404
 
 
-from .forms import UserRegisterForm, ProductNewForm
+from .forms import UserRegisterForm, ProductNewForm, ProfileForm
 from .models import Category, Product, Profile
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
@@ -84,11 +87,14 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         user = form.save()
+        image = form.cleaned_data.get('image')
+        address = form.cleaned_data.get('address')
         profile = Profile()
         profile.user = user
+        profile.profile_pic = image
+        profile.address = address
         user.save()
         profile.save()
-        #login(self.request.user)
 
         return HttpResponseRedirect(reverse_lazy('cryptoshop:product_list'))
 
@@ -142,5 +148,24 @@ def product_list(request, category_slug=None):
                   {'category': category,
                    'categories': categories,
                    'products': products})
+
+
+class PasswordChangingView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    template_name = "profile/change_password.html"
+    logger.info("use PasswordChangingView")
+
+    def get_success_url(self):
+        return reverse_lazy("cryptoshop:profile", kwargs={'pk': self.kwargs['pk']})
+
+
+class EditProfileView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    template_name = "profile/edit_profile.html"
+    form_class = ProfileForm
+    logger.info("use EditProfileView")
+
+    def get_success_url(self):
+        return reverse_lazy("cryptoshop:profile", kwargs={'pk': self.kwargs['pk']})
 
 

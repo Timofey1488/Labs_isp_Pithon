@@ -1,4 +1,3 @@
-import builtins
 from decimal import Decimal
 from django.conf import settings
 from cryptoshop.models import Product
