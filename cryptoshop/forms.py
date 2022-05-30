@@ -2,10 +2,10 @@ import re
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 from django.core.validators import EmailValidator
 from django.forms import ModelForm
 from .models import Profile, Product
+from captcha.fields import CaptchaField
 from django.core.exceptions import ValidationError
 
 
@@ -15,9 +15,11 @@ class UserRegisterForm(UserCreationForm):
                                          "characters.")
     image = forms.ImageField(required=False)
     email = forms.EmailField(required=True, validators=[EmailValidator(message="Email is invalid")])
+
     address = forms.CharField(required=False)
     first_name = forms.CharField(required=False, help_text="First letter should be uppercase. Only latin characters. ")
     last_name = forms.CharField(required=False, help_text="First letter should be uppercase. Only latin characters. ")
+    captcha = CaptchaField()
 
     def clean_username(self):
         data = self.cleaned_data['username']
@@ -45,7 +47,7 @@ class UserRegisterForm(UserCreationForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ('profile_pic', "address", "work_place")
+        fields = ('profile_pic', "address", "work_place", "email")
 
 
 class ProductNewForm(ModelForm):
@@ -57,6 +59,7 @@ class ProductNewForm(ModelForm):
             'name': forms.TextInput(attrs={"class": "form-control"}),
             'description': forms.TextInput(attrs={"class": "form-control"}),
         }
+    captcha = CaptchaField()
 
 
 

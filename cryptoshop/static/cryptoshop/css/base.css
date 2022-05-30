@@ -1,6 +1,5 @@
 body {
     font-family: sans-serif;
-     height: 100000px;
 }
 
 .container-fluid {
@@ -29,7 +28,6 @@ a:hover {
     text-decoration: underline;
 }
 .main_content{
-    height: 100000px;
     padding-top: 30px;
     margin-bottom: 20px;
 }

@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'cryptoshop.apps.CryptoshopConfig',
     'cart.apps.CartConfig',
     'crispy_forms',
-    'orders.apps.OrdersConfig'
+    'orders.apps.OrdersConfig',
+    'captcha'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -21,5 +21,6 @@ urlpatterns = [
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('', include('cryptoshop.urls')),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('captcha/', include('captcha.urls')),
 ]

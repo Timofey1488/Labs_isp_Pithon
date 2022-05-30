@@ -11,7 +11,6 @@ import logging
 
 from django.shortcuts import render, get_object_or_404
 
-
 from .forms import UserRegisterForm, ProductNewForm, ProfileForm
 from .models import Category, Product, Profile
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
@@ -89,10 +88,12 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
         user = form.save()
         image = form.cleaned_data.get('image')
         address = form.cleaned_data.get('address')
+        email = form.cleaned_data.get('email')
         profile = Profile()
         profile.user = user
         profile.profile_pic = image
         profile.address = address
+        profile.email = email
         user.save()
         profile.save()
 

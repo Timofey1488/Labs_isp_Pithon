@@ -13,8 +13,13 @@ logging.disable()
 
 
 class TestViews(TestCase):
+    def __init__(self, methodName: str = ...):
+        super().__init__(methodName)
+        self.profile = None
+
     def setUp(self):
         self.client = Client()
+        self.user = User.objects.create(username='testuser', password="password")
         self.category = Category.objects.create(name='Something')
         self.product = Product.objects.create(category=self.category, name="Your Mother", price="100", description="Somesdhfgkjdfg",
                                               stock=10)
@@ -31,6 +36,16 @@ class TestViews(TestCase):
     def test_logout(self):
         response = self.client.get(reverse('logout'))
         self.assertEqual(response.status_code, 200)
+
+    def test_edit_profile(self):
+        self.profile = Profile.objects.create(user=self.user)
+        response = self.client.get(reverse('cryptoshop:edit_profile', kwargs={'pk': self.profile.pk}))
+        self.assertEqual(response.status_code, 302)
+
+    def test_change_password(self):
+        self.profile = Profile.objects.create(user=self.user)
+        response = self.client.get(reverse('cryptoshop:change_password', kwargs={'pk': self.profile.pk}))
+        self.assertEqual(response.status_code, 302)
 
 
 class SignUpPageTests(TestCase):
@@ -68,6 +83,10 @@ class ProductTests(TestCase):
     def test_product_delete_page(self):
         response = self.client.post(reverse("cryptoshop:delete_product", kwargs={'pk': self.product.pk}))
         self.assertEqual(response.status_code, 302)
+
+    def test_product_update_page(self):
+        response = self.client.post(reverse("cryptoshop:edit_product", kwargs={'pk': self.product.pk}))
+        self.assertEqual(response.status_code, 200)
 
 
 class TestForms(SimpleTestCase):
