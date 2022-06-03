@@ -113,6 +113,11 @@ class TestViewsCart(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'cart/detail.html')
 
+    def test_mail(self):
+        response = self.client.get(reverse('cryptoshop:write_news'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'cryptoshop/write_news.html')
+
 
 class TestFormAdd(SimpleTestCase):
     def test_form_add(self):

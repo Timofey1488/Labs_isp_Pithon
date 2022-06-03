@@ -7,5 +7,16 @@ def send_message(email, text, topic):
         text,
         'medved20032003@gmail.com',
         [email],
+        fail_silently=False  # errors will be cancel
+    )
+
+
+def send_order_message(user, email, text, order):
+    send_mail(
+        f"Hi, thank you for order {user}",
+        f"{text}"
+        f"order: {order}",
+        'medved20032003@gmail.com',
+        [email],
         fail_silently=False
     )

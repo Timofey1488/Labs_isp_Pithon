@@ -181,7 +181,7 @@ def write_news(request):
             topic = form.cleaned_data['topic']
             users = User.objects.all()
             for user in users:
-                if user.email is not '':
+                if user.email != '':
                     # send_message('testispasync1234@gmail.com', text, topic)
                     send_message_async.delay(user.email, text, topic)
             return HttpResponseRedirect(reverse_lazy('cryptoshop:product_list'))
