@@ -47,7 +47,7 @@ class Profile(models.Model):
     profile_pic = models.ImageField(blank=True, upload_to="photos/profile/%Y/%m/%d", default="static/img/no_image.png")
     address = models.CharField(max_length=100, blank=True)
     work_place = models.CharField(max_length=100, blank=True)
-    email = models.EmailField(max_length=254, default=False)
+    email = models.EmailField(max_length=254, default='No email')
 
     def __str__(self):
         return self.user.username

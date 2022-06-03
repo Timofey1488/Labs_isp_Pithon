@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
@@ -10,8 +11,10 @@ from cart.forms import CartAddProductForm
 import logging
 
 from django.shortcuts import render, get_object_or_404
+from .send_mail import send_message
+from .tasks import send_message_async
 
-from .forms import UserRegisterForm, ProductNewForm, ProfileForm
+from .forms import UserRegisterForm, ProductNewForm, ProfileForm, WriteNewsForm
 from .models import Category, Product, Profile
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 
@@ -170,3 +173,20 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         return reverse_lazy("cryptoshop:profile", kwargs={'pk': self.kwargs['pk']})
 
 
+def write_news(request):
+    if request.method == 'POST':
+        form = WriteNewsForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            topic = form.cleaned_data['topic']
+            users = User.objects.all()
+            for user in users:
+                if user.email is not '':
+                    # send_message('testispasync1234@gmail.com', text, topic)
+                    send_message_async.delay(user.email, text, topic)
+            return HttpResponseRedirect(reverse_lazy('cryptoshop:product_list'))
+
+    else:
+        form = WriteNewsForm()
+
+    return render(request, 'cryptoshop/write_news.html', {'form': form})

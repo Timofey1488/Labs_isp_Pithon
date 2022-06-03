@@ -25,8 +25,11 @@
                     </li>
                     {% if user.is_staff %}
                         <li class="nav-item">
-                        <a class="nav-link" href="{% url "cryptoshop:add_product" %}">Create new</a>
-                    </li>
+                            <a class="nav-link" href="{% url "cryptoshop:add_product" %}">Create new</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="{% url "cryptoshop:write_news" %}">Write news</a>
+                        </li>
                     {% endif %}
                 </ul>
                 <ul class="navbar-nav">

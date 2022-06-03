@@ -45,6 +45,23 @@ INSTALLED_APPS = [
     'captcha'
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True  # safe connection with smtp-server
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'medved20032003@gmail.com'
+EMAIL_HOST_PASSWORD = 'pepbwzwqaiovspmf'
+
+REDIS_HOST = '0.0.0.0'
+REDIS_PORT = '6379'
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 CART_SESSION_ID = "cart"

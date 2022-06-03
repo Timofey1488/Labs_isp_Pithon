@@ -13,10 +13,6 @@ logging.disable()
 
 
 class TestViews(TestCase):
-    def __init__(self, methodName: str = ...):
-        super().__init__(methodName)
-        self.profile = None
-
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create(username='testuser', password="password")
@@ -93,7 +89,7 @@ class TestForms(SimpleTestCase):
     def test_form_new_product(self):
         form = ProductNewForm(data={})
         self.assertFalse(form.is_valid())
-        self.assertEqual(len(form.errors), 4)
+        self.assertEqual(len(form.errors), 5)
 
 
 class TestViewsCart(TestCase):

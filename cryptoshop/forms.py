@@ -50,6 +50,12 @@ class ProfileForm(ModelForm):
         fields = ('profile_pic', "address", "work_place", "email")
 
 
+class WriteNewsForm(forms.Form):
+    topic = forms.CharField(label='Topic of message', max_length=200)
+    text = forms.CharField(label='Your news/discount', max_length=200)
+    captcha = CaptchaField()
+
+
 class ProductNewForm(ModelForm):
     class Meta:
         model = Product

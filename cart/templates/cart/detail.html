@@ -7,7 +7,7 @@
 
 {% block content %}
     {% if cart.get_total_price == 0 %}
-                <div class="container-fluid text-center mt-3  categories">
+                <div class="container-fluid text-center mt-3 categories">
                     <h1>Сart is empty</h1>
                     <a class="btn btn-primary mt-4" href="{% url "cryptoshop:product_list" %}">Return back</a>
                 </div>
