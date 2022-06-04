@@ -52,7 +52,7 @@ class ProfileForm(ModelForm):
 
 class WriteNewsForm(forms.Form):
     topic = forms.CharField(label='Topic of message', max_length=200)
-    text = forms.CharField(label='Your news/discount', max_length=200)
+    text = forms.CharField(label='Your news/discount', widget=forms.Textarea)
     captcha = CaptchaField()
 
 
@@ -60,11 +60,6 @@ class ProductNewForm(ModelForm):
     class Meta:
         model = Product
         fields = ['category', 'name', 'image', 'description', 'price', 'available', 'stock']
-        widgets = {
-            'category': forms.Select(attrs={"class": "form-control"}),
-            'name': forms.TextInput(attrs={"class": "form-control"}),
-            'description': forms.TextInput(attrs={"class": "form-control"}),
-        }
     captcha = CaptchaField()
 
 
