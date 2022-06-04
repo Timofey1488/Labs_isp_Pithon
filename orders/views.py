@@ -20,9 +20,11 @@ def order_create(request):  # get current session cart
                                          quantity=item['quantity'])
                 item_product = item['product']
                 item_price = item['price']
-                text.append(f'item: {item_product}')
-                text.append(f'price: {item_price}')
-            send_order_message(order.first_name, order.email, text, order.id)
+                item_count = item['quantity']
+                text.append(f'{item_product}:{item_price}x{item_count}')
+            my_str = ', '.join(text)
+            total = cart.get_total_price()
+            send_order_message(order.first_name, order.email, my_str, order.id, total)
             # clearing cart
             cart.clear()
             return render(request, 'orders/created_order.html',

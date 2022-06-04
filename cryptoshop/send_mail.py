@@ -11,11 +11,14 @@ def send_message(email, text, topic):
     )
 
 
-def send_order_message(user, email, text, order):
+def send_order_message(user, email, text, order, total):
     send_mail(
         f"Hi, thank you for order {user}",
-        f"{text}"
-        f"order: {order}",
+        f"Your products:\n"
+        f"{text}\n"
+        f"Order number: {order}\n"
+        f"Total price: {total}\n"
+        f"We will contact you soon",
         'medved20032003@gmail.com',
         [email],
         fail_silently=False
