@@ -2785,3 +2785,5 @@ INFO 2022-06-08 23:16:43,073 basehttp 7777 139868572575488 "GET /profile/4/ HTTP
 INFO 2022-06-08 23:16:44,235 basehttp 7777 139868572575488 "GET / HTTP/1.1" 200 13862
 INFO 2022-06-08 23:18:45,758 autoreload 7777 139868639467328 /home/timofey/lab3_cryptoshop/lab3_cryptoshop/settings.py changed, reloading.
 INFO 2022-06-08 23:18:50,491 autoreload 10651 140491976955712 Watching for file changes with StatReloader
+INFO 2022-06-08 23:39:21,897 autoreload 10651 140491976955712 /home/timofey/lab3_cryptoshop/lab3_cryptoshop/settings.py changed, reloading.
+INFO 2022-06-08 23:39:24,133 autoreload 13334 140395932436288 Watching for file changes with StatReloader
