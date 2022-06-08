@@ -2756,3 +2756,7 @@ INFO 2022-06-08 21:52:16,693 autoreload 15598 140597349001024 /home/timofey/lab3
 INFO 2022-06-08 21:52:19,681 autoreload 22289 139872063801152 Watching for file changes with StatReloader
 INFO 2022-06-08 21:52:30,616 autoreload 22289 139872063801152 /home/timofey/lab3_cryptoshop/lab3_cryptoshop/settings.py changed, reloading.
 INFO 2022-06-08 21:52:32,402 autoreload 22305 140311680755520 Watching for file changes with StatReloader
+INFO 2022-06-08 22:58:11,725 autoreload 7777 139868639467328 Watching for file changes with StatReloader
+INFO 2022-06-08 22:58:23,978 basehttp 7777 139868572575488 "GET / HTTP/1.1" 200 13862
+WARNING 2022-06-08 22:58:25,210 log 7777 139868572575488 Not Found: /favicon.ico
+WARNING 2022-06-08 22:58:25,213 basehttp 7777 139868572575488 "GET /favicon.ico HTTP/1.1" 404 4974
