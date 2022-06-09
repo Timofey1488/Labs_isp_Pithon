@@ -2787,3 +2787,10 @@ INFO 2022-06-08 23:18:45,758 autoreload 7777 139868639467328 /home/timofey/lab3_
 INFO 2022-06-08 23:18:50,491 autoreload 10651 140491976955712 Watching for file changes with StatReloader
 INFO 2022-06-08 23:39:21,897 autoreload 10651 140491976955712 /home/timofey/lab3_cryptoshop/lab3_cryptoshop/settings.py changed, reloading.
 INFO 2022-06-08 23:39:24,133 autoreload 13334 140395932436288 Watching for file changes with StatReloader
+INFO 2022-06-09 00:01:54,081 autoreload 13334 140395932436288 /home/timofey/lab3_cryptoshop/venv/lib/python3.8/site-packages/psycopg2/__init__.py changed, reloading.
+INFO 2022-06-09 00:04:24,102 autoreload 16351 139818957653824 Watching for file changes with StatReloader
+INFO 2022-06-09 00:05:51,286 basehttp 16351 139818879125248 "GET / HTTP/1.1" 200 13862
+INFO 2022-06-09 00:05:52,594 basehttp 16351 139818879125248 "GET / HTTP/1.1" 200 13862
+INFO 2022-06-09 00:05:56,046 basehttp 16351 139818879125248 "GET / HTTP/1.1" 200 13862
+INFO 2022-06-09 00:05:58,341 basehttp 16351 139818879125248 "GET /profile/4/ HTTP/1.1" 200 3768
+INFO 2022-06-09 00:06:01,021 basehttp 16351 139818879125248 "GET / HTTP/1.1" 200 13862
