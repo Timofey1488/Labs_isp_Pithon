@@ -1,1 +1,1 @@
-web: gunicorn lab3_cryptoshop.py
+web: gunicorn lab3_cryptoshop.wsgi
