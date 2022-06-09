@@ -20,11 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$ikjkdc212nigouel48(o%&zz0bdvg6(ay62jlk)11&%n4d-w3'
+# SECRET_KEY = 'django-insecure-$ikjkdc212nigouel48(o%&zz0bdvg6(ay62jlk)11&%n4d-w3'
 
+SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mycryptoshopapp.herokuapp.com']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # for work with images or other media, create folder media/
